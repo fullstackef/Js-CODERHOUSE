@@ -6,26 +6,26 @@ const PRODUCTO3 = 8000
 let cantidad;
 let total = 0;
 let opcion;
-let agregar;
+let agregar = "si";
 
 function calculo(acumulado, precio, cantidad) {
-    return acumulado + precio*cantidad
+    return acumulado + precio * cantidad;
 }
 
-alert("Bienvenido a Vinoteca los Amigos, pulse ACEPTAR para agregar a su carrito de compra")
+alert("Bienvenido a Vinoteca los Amigos, \nPulse ACEPTAR para agregar a su carrito de compra")
 
-do{
-    opcion = parseInt (prompt("¿Que vino desdeas elegir?" + "\n" + "\n" +
-    "1- Vino malbec:$" + PRODUCTO1 + "\n" +
-    "2- Vino malbec Reserva:$" + PRODUCTO2 + "\n" +
-    "3- Vino malbec Gran Reserva:$" + PRODUCTO3 + "\n"));
+while (agregar.toLowerCase() === "si") {
+    opcion = parseInt(prompt("¿Que vino desdeas elegir?" + "\n" + "\n" +
+        "1- Vino malbec:$" + PRODUCTO1 + "\n" +
+        "2- Vino malbec Reserva:$" + PRODUCTO2 + "\n" +
+        "3- Vino malbec Gran Reserva:$" + PRODUCTO3 + "\n"));
 
-    switch (opcion){
+    switch (opcion) {
         case 1:
             cantidad = parseInt(prompt("Ingrese la cantidad de vinos elegidos"));
             total = calculo(total, PRODUCTO1, cantidad);
             break;
-        
+
         case 2:
             cantidad = parseInt(prompt("Ingrese la cantidad de vinos elegidos"));
             total = calculo(total, PRODUCTO2, cantidad);
@@ -38,9 +38,8 @@ do{
 
         default:
             alert("Ingrese una opcion correcta");
+            continue;
     }
-        agregar= prompt ("¿Deseas agregar un vino mas? Si / NO")
-    } while (agregar.toLowerCase() !== "no" )
-
-
-    alert ("El total a pagar es: $" + total)
+    agregar = prompt("¿Deseas agregar un vino mas? Si / NO")
+}
+alert("El total a pagar es: $" + total)
