@@ -1,45 +1,45 @@
+const PRODUCTOS = [
+    { nombre: "Vino malbec", precio: 1500 },
+    { nombre: "Vino malbec Reserva", precio: 5500 },
+    { nombre: "Vino malbec Gran Reserva", precio: 8000 }
+];
 
-
-const PRODUCTO1 = 1500
-const PRODUCTO2 = 5500
-const PRODUCTO3 = 8000
-let cantidad;
-let total = 0;
-let opcion;
+let carrito = [];
 let agregar = "si";
 
-function calculo(acumulado, precio, cantidad) {
-    return acumulado + precio * cantidad;
+function calcularTotal() {
+    return carrito.reduce((acumulado, producto) => acumulado + producto.precio * producto.cantidad, 0);
 }
 
-alert("Bienvenido a Vinoteca los Amigos, \nPulse ACEPTAR para agregar a su carrito de compra")
+alert("Bienvenido a Vinoteca los Amigos. Pulsa ACEPTAR para agregar a tu carrito de compra");
 
 while (agregar.toLowerCase() === "si") {
-    opcion = parseInt(prompt("¿Que vino desdeas elegir?" + "\n" + "\n" +
-        "1- Vino malbec:$" + PRODUCTO1 + "\n" +
-        "2- Vino malbec Reserva:$" + PRODUCTO2 + "\n" +
-        "3- Vino malbec Gran Reserva:$" + PRODUCTO3 + "\n"));
+    const opcion = parseInt(prompt("¿Qué vino deseas elegir?\n\n" +
+        "1- Vino malbec: $" + PRODUCTOS[0].precio + "\n" +
+        "2- Vino malbec Reserva: $" + PRODUCTOS[1].precio + "\n" +
+        "3- Vino malbec Gran Reserva: $" + PRODUCTOS[2].precio + "\n"));
 
-    switch (opcion) {
-        case 1:
-            cantidad = parseInt(prompt("Ingrese la cantidad de vinos elegidos"));
-            total = calculo(total, PRODUCTO1, cantidad);
-            break;
+    if (opcion >= 1 && opcion <= 3) {
+        const cantidad = parseInt(prompt("Ingrese la cantidad de vinos elegidos"));
 
-        case 2:
-            cantidad = parseInt(prompt("Ingrese la cantidad de vinos elegidos"));
-            total = calculo(total, PRODUCTO2, cantidad);
-            break;
-
-        case 3:
-            cantidad = parseInt(prompt("Ingrese la cantidad de vinos elegidos"));
-            total = calculo(total, PRODUCTO3, cantidad);
-            break;
-
-        default:
-            alert("Ingrese una opcion correcta");
-            continue;
+        const productoElegido = { ...PRODUCTOS[opcion - 1], cantidad: cantidad };
+        carrito.push(productoElegido);
+    } else {
+        alert("Ingrese una opción correcta");
+        continue;
     }
-    agregar = prompt("¿Deseas agregar un vino mas? Si / NO")
+
+    agregar = prompt("¿Deseas agregar otro vino? Si / NO");
 }
-alert("El total a pagar es: $" + total)
+
+const totalAPagar = calcularTotal();
+
+alert("El total a pagar es: $" + totalAPagar);
+alert("Resumen de tu factura:\n");
+
+carrito.forEach((producto, index) => {
+    const subtotal = producto.precio * producto.cantidad;
+    alert(`${index + 1}. ${producto.nombre} x ${producto.cantidad} - Subtotal: $${subtotal}`);
+});
+
+alert("Gracias por tu compra. ¡Te esperamos pronto!");
