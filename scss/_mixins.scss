@@ -1,0 +1,7 @@
+/*el mixin esta aplicado en el scss main linea 76 y scss contacto*/
+@mixin flexbox($display,$justificacion,$alineacion,$direccion){
+    display: $display;
+    justify-content: $justificacion;
+    align-items: $alineacion;
+    flex-direction: $direccion;
+}

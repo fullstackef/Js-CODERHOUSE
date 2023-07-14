@@ -1,0 +1,216 @@
+@charset "UTF-8";
+/*import utilizados*/
+@import url("https://fonts.googleapis.com/css2?family=Delicious+Handrawn&family=Edu+NSW+ACT+Foundation:wght@500&family=Fasthand&family=Lora:wght@600&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*aplicado en scss de body, en scss main linea 70 y scss de footer */
+/*se utiliza mapa en scss contacto*/
+/*el mixin esta aplicado en el scss main linea 76 y scss contacto*/
+body {
+  font-family: "Delicious Handrawn", cursive;
+}
+
+.descripcionestexto {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.h1html {
+  font-size: 5rem;
+  text-align: center;
+  color: bisque;
+  margin-top: 20vh;
+}
+
+.titulotexto {
+  color: slateblue;
+  font-weight: bold;
+}
+
+.año {
+  font-size: 3rem;
+  color: rebeccapurple;
+}
+
+.descripcionestexto404 {
+  font-size: 2rem;
+  text-align: center;
+  color: slateblue;
+}
+
+.header {
+  height: 100vh;
+  background-image: url("../assets/img/FONDO INDEX.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.logo {
+  width: 40%;
+  height: 30%;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: bisque;
+  font-size: 2rem;
+}
+
+.nav-item {
+  color: bisque;
+  font-size: large;
+}
+
+/*extend utilizados en esta pagina*/
+.izquierdaviñedosindex, .izquierda-uvatriste-404, .izquierda-2025-historia, .izquierda-2019-historia, .izquierda-2010-historia, .izquierda-2008-historia, .izquierda-2006-historia, .izquierda-2005-historia, .izquierda-chardonnay-cepas, .izquierda-merlot-cepas, .izquierda-cabernet-cepas, .izquierda-malbec-cepas, .izquierda-comollegar-ubicacion, .izquierda-contacto-ubicacion, .izquierda-contacto-contacto, .izquierda-cata-ubicacion, .izquierda-experiencia-ubicacion, .izquierdavisitanosindex {
+  background-image: url(../assets/img/viñedos\ main\ 1.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 55vh;
+}
+
+.izquierdavisitanosindex {
+  background-image: url(../assets/img/botella\ y\ 2\ copas\ red.jpeg);
+}
+
+.izquierda-experiencia-ubicacion {
+  background-image: url(../assets/img/experiencia\ gastronomica.jpg);
+}
+
+.izquierda-cata-ubicacion {
+  background-image: url(../assets/img/cata_vinos.jpg);
+}
+
+.izquierda-contacto-contacto {
+  background-image: url(../assets/img/contcto\ formulario.png);
+}
+
+.izquierda-contacto-ubicacion {
+  background-image: url(../assets/img/contactoubicacion.jpg);
+}
+
+.izquierda-comollegar-ubicacion {
+  background-image: url(../assets/img/como\ llegar\ unicacion.jpg);
+}
+
+.izquierda-malbec-cepas {
+  background-image: url(../assets/img/malbec.jpg);
+}
+
+.izquierda-cabernet-cepas {
+  background-image: url(../assets/img/cabernet\ sauvignon.jpg);
+}
+
+.izquierda-merlot-cepas {
+  background-image: url(../assets/img/merlot.png);
+}
+
+.izquierda-chardonnay-cepas {
+  background-image: url(../assets/img/chardonnay.png);
+}
+
+.izquierda-2005-historia {
+  background-image: url(../assets/img/2005.jpg);
+}
+
+.izquierda-2006-historia {
+  background-image: url(../assets/img/2006.png);
+}
+
+.izquierda-2008-historia {
+  background-image: url(../assets/img/primerembotellado.jpg);
+}
+
+.izquierda-2010-historia {
+  background-image: url(../assets/img/2010.jpg);
+}
+
+.izquierda-2019-historia {
+  background-image: url(../assets/img/2019.jpg);
+}
+
+.izquierda-2025-historia {
+  background-image: url(../assets/img/2025.jpg);
+}
+
+.izquierda-uvatriste-404 {
+  background-image: url(../assets/img/uva\ triste.jpg);
+}
+
+.main {
+  background-color: bisque;
+}
+
+.derecha {
+  height: auto;
+  background-color: bisque;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.main404 {
+  height: 85vh;
+}
+
+/*anidacion */
+footer {
+  background-color: rgb(194, 60, 92);
+  /*@media (max-width:768px) {
+      .footerLogo {
+          margin-left: 35%;
+      }*/
+}
+footer .footerLogo {
+  height: 15vh;
+  margin-top: 0% auto;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+footer p {
+  margin-top: 0% auto;
+  margin-right: 0%;
+  text-align: center;
+  font-size: 2rem;
+}
+footer .redes {
+  margin-top: 0% auto;
+  margin-right: 0%;
+  text-align: center;
+}
+footer a {
+  text-decoration: none;
+}
+footer .colorinstagram {
+  color: #ff00c8;
+}
+footer .colortwitter {
+  color: #109df4;
+}
+
+.viaweb {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+body {
+  background-color: bisque;
+}
+
+.body404 {
+  background-image: url(../assets/img/uva\ triste2.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}/*# sourceMappingURL=estilos.css.map */

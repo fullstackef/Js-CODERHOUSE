@@ -1,0 +1,20 @@
+.header{
+    height: 100vh;
+    background-image: url("../assets/img/FONDO\ INDEX.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; 
+    background-attachment: fixed;
+}
+.logo{
+    width: 40%;
+    height: 30%;  
+}
+.navbar-light .navbar-nav .nav-link{
+    color:bisque;
+    font-size: 2rem;
+}
+.nav-item{
+    color: bisque;
+    font-size: large;
+}

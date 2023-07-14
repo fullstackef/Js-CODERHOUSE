@@ -1,0 +1,6 @@
+.viaweb{
+    display: map-get($map-flex,display);
+    justify-content: map-get($map-flex,justificacion);
+    align-items: map-get($map-flex,alineacion);
+    flex-direction: map-get($map-flex,direccion);
+}

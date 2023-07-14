@@ -1,0 +1,85 @@
+/*extend utilizados en esta pagina*/
+.izquierdaviñedosindex{
+    background-image: url(../assets/img/viñedos\ main\ 1.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 55vh;
+}
+.izquierdavisitanosindex{
+    background-image: url(../assets/img/botella\ y\ 2\ copas\ red.jpeg);
+    @extend .izquierdaviñedosindex
+}
+.izquierda-experiencia-ubicacion{
+    background-image: url(../assets/img/experiencia\ gastronomica.jpg);
+    @extend .izquierdaviñedosindex
+}
+.izquierda-cata-ubicacion{
+    background-image: url(../assets/img/cata_vinos.jpg);
+    @extend .izquierdaviñedosindex
+}
+.izquierda-contacto-contacto{
+    background-image: url(../assets/img/contcto\ formulario.png);
+    @extend .izquierdaviñedosindex 
+}  
+.izquierda-contacto-ubicacion{
+    background-image: url(../assets/img/contactoubicacion.jpg);
+    @extend .izquierdaviñedosindex  
+}
+.izquierda-comollegar-ubicacion{
+    background-image: url(../assets/img/como\ llegar\ unicacion.jpg);
+    @extend .izquierdaviñedosindex
+}
+.izquierda-malbec-cepas{
+    background-image: url(../assets/img/malbec.jpg);
+    @extend .izquierdaviñedosindex
+}
+.izquierda-cabernet-cepas{
+    background-image: url(../assets/img/cabernet\ sauvignon.jpg);
+    @extend .izquierdaviñedosindex
+}
+.izquierda-merlot-cepas{
+    background-image: url(../assets/img/merlot.png);
+    @extend .izquierdaviñedosindex
+}
+.izquierda-chardonnay-cepas{
+    background-image: url(../assets/img/chardonnay.png);
+    @extend .izquierdaviñedosindex
+}
+.izquierda-2005-historia{
+    background-image: url(../assets/img/2005.jpg);
+    @extend .izquierdaviñedosindex
+}
+.izquierda-2006-historia{
+        background-image: url(../assets/img/2006.png);
+        @extend .izquierdaviñedosindex
+}
+.izquierda-2008-historia{
+    background-image: url(../assets/img/primerembotellado.jpg);
+    @extend .izquierdaviñedosindex
+}
+.izquierda-2010-historia{
+    background-image: url(../assets/img/2010.jpg);
+    @extend .izquierdaviñedosindex
+}
+.izquierda-2019-historia{
+    background-image: url(../assets/img/2019.jpg);
+    @extend .izquierdaviñedosindex
+}
+.izquierda-2025-historia{
+    background-image: url(../assets/img/2025.jpg);
+    @extend .izquierdaviñedosindex
+}
+.izquierda-uvatriste-404{
+    background-image: url(../assets/img/uva\ triste.jpg);
+    @extend .izquierdaviñedosindex
+}
+.main{
+    background-color: $fondomain ;
+}
+.derecha{
+    height: auto;
+    background-color: bisque;
+    @include flexbox(flex,center,center,column);
+    
+}
