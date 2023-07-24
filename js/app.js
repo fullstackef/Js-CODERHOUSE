@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       carrito.push({
         nombre: producto.nombre,
+        precio: producto.precio,
         unidades: unidades,
         subtotal: producto.precio * unidades,
       });
@@ -25,7 +26,18 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function removerDelCarrito(nombreProducto) {
-    carrito = carrito.filter((item) => item.nombre !== nombreProducto);
+    carrito = carrito.map((item) => {
+      if (item.nombre === nombreProducto) {
+        if (item.unidades > 1) {
+          item.unidades -= 1;
+          item.subtotal = item.unidades * item.precio;
+        } else {
+          return null;
+        }
+      }
+      return item;
+    }).filter(Boolean);
+
     guardarPedidoEnLocalStorage();
     mostrarCarrito();
   }
