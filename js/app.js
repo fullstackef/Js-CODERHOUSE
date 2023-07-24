@@ -1,9 +1,8 @@
-// JavaScript
 document.addEventListener("DOMContentLoaded", function () {
   const botonesAgregar = document.querySelectorAll(".btn-primary");
   const tablaBody = document.getElementById("Cuerpocarrito");
   const btnVaciarCarrito = document.getElementById("btnVaciarCarrito");
-  const totalCarrito = document.getElementById("totalCarrito"); // Agrega el elemento HTML para mostrar el total
+  const btnComprar = document.getElementById("btnComprar");
 
   let carrito = obtenerPedidosDeLocalStorage();
 
@@ -12,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (productoExistente) {
       productoExistente.unidades += unidades;
-      productoExistente.subtotal += producto.precio * unidades;
+      productoExistente.subtotal = productoExistente.unidades * productoExistente.precio;
     } else {
       carrito.push({
         nombre: producto.nombre,
@@ -25,34 +24,15 @@ document.addEventListener("DOMContentLoaded", function () {
     mostrarCarrito();
   }
 
-  function agregarEventListenersBotonesRemover() {
-    const botonesRemover = document.querySelectorAll(".btn-remover");
-    botonesRemover.forEach((boton) => {
-      boton.addEventListener("click", () => {
-        const nombreProducto = boton.getAttribute("data-nombre");
-        removerDelCarrito(nombreProducto);
-      });
-    });
-  }
-
   function removerDelCarrito(nombreProducto) {
-    const productoExistente = carrito.find((item) => item.nombre === nombreProducto);
-
-    if (productoExistente) {
-      if (productoExistente.unidades > 1) {
-        productoExistente.unidades -= 1;
-        productoExistente.subtotal -= productoExistente.precio;
-      } else {
-        carrito = carrito.filter((item) => item.nombre !== nombreProducto);
-      }
-    }
-
+    carrito = carrito.filter((item) => item.nombre !== nombreProducto);
     guardarPedidoEnLocalStorage();
     mostrarCarrito();
   }
 
   function mostrarCarrito() {
     tablaBody.innerHTML = "";
+    let totalCarrito = 0;
 
     carrito.forEach((item) => {
       const fila = document.createElement("tr");
@@ -60,18 +40,21 @@ document.addEventListener("DOMContentLoaded", function () {
         <td>${item.nombre}</td>
         <td>${item.unidades}</td>
         <td>$${item.subtotal.toFixed(2)}</td>
-        <td><button class="btn btn-danger btn-remover" data-nombre="${item.nombre}">Remover</button></td>
+        <td><button class="btn btn-danger btn-remover" data-producto="${item.nombre}">Remover</button></td>
       `;
       tablaBody.appendChild(fila);
+
+      totalCarrito += item.subtotal;
     });
+
+    btnComprar.textContent = `Comprar - Total: $${totalCarrito.toFixed(2)}`;
 
     agregarEventListenersBotonesRemover();
     actualizarTotal();
   }
 
-  function actualizarTotal() {
-    const total = carrito.reduce((acc, item) => acc + item.subtotal, 0);
-    totalCarrito.textContent = `$${total.toFixed(2)}`;
+  function calcularTotalCarrito() {
+    return carrito.reduce((total, item) => total + item.subtotal, 0);
   }
 
   botonesAgregar.forEach(function (boton) {
@@ -89,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   tablaBody.addEventListener("click", function (event) {
     if (event.target.classList.contains("btn-remover")) {
-      const nombreProducto = event.target.getAttribute("data-nombre");
+      const nombreProducto = event.target.dataset.producto;
       removerDelCarrito(nombreProducto);
     }
   });
@@ -109,13 +92,22 @@ document.addEventListener("DOMContentLoaded", function () {
     return pedidos ? JSON.parse(pedidos) : [];
   }
 
+  function vaciarLocalStorage() {
+    localStorage.removeItem("pedidos");
+  }
+
   // Cargar datos desde JSON local
   let productos = [];
   fetch("productos.json")
     .then((response) => response.json())
     .then((data) => {
-      productos = data; // Array de objetos con los datos de los productos
+      productos = data;
       mostrarCarrito();
     })
     .catch((error) => console.error("Error al cargar los productos:", error));
+
+  // Event listener para mostrar el alert con el total al presionar el botón "Comprar"
+  btnComprar.addEventListener("click", function () {
+    alert(`Gracias por su compra, el total es: $${calcularTotalCarrito().toFixed(2)}`);
+  });
 });

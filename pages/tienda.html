@@ -193,23 +193,27 @@
                     </div>
                     <div class="col-md-5">
                         <h2 class="text-center my-5 text-white display-5">CARRITO</h2>
-                        <table class="table table-success">
-                            <thead>
-                                <tr>
-                                    <th class="headTabla productosCol" scope="col">Producto</th>
-                                    <th class="headTabla cantidadCol" scope="col">Cantidad</th>
-                                    <th class="headTabla subtotalCol" scope="col">Subtotal</th>
-                                </tr>
-                            </thead>
-                            <tbody id="Cuerpocarrito">
-                            </tbody>
-                        </table>
-                        <div class="text-center">
+                        <div class="table-responsive"> <!-- Agregamos una clase para hacer la tabla responsive -->
+                            <table class="table table-success">
+                                <thead>
+                                    <tr>
+                                        <th class="headTabla productosCol" scope="col">Producto</th>
+                                        <th class="headTabla cantidadCol" scope="col">Cantidad</th>
+                                        <th class="headTabla subtotalCol" scope="col">Subtotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="Cuerpocarrito">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="text-end"> <!-- Clase 'text-end' para alinear el botón a la derecha -->
                             <button id="btnVaciarCarrito" class="btn btn-danger">Vaciar Carrito</button>
+                            <!-- Agregamos el botón "Comprar" -->
+                            <button id="btnComprar" class="btn btn-primary">Comprar - Total: $0.00</button>
                         </div>
                     </div>
-                </div>
-            </div>
+                    
+                    
         </main>
     </main>
     <footer>
