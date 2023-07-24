@@ -1,0 +1,33 @@
+[
+    {
+      "nombre": "Cabernet Sauvignon",
+      "precio": 1500,
+      "imagen": "../assets/img/TIENDA/cabernet.webp"
+    },
+    {
+      "nombre": "Merlot",
+      "precio": 2000,
+      "imagen": "../assets/img/TIENDA/merlot.jpg"
+    },
+    {
+      "nombre": "Sirah",
+      "precio": 1750,
+      "imagen": "../assets/img/TIENDA/SIRAH.webp"
+    },
+    {
+      "nombre": "Bonarda",
+      "precio": 1250,
+      "imagen": "../assets/img/TIENDA/bonarda.webp"
+    },
+    {
+      "nombre": "Petit Verdot",
+      "precio": 1000,
+      "imagen": "../assets/img/TIENDA/petit verdot.webp"
+    },
+    {
+      "nombre": "Malbec Gran Reserva",
+      "precio": 3500,
+      "imagen": "../assets/img/TIENDA/MALBEC.webp"
+    }
+  ]
+  
