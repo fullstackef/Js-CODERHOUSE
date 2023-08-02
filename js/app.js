@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", function () {
         subtotal: producto.precio * unidades,
       });
     }
-
     guardarPedidoEnLocalStorage();
     mostrarCarrito();
   }
@@ -157,5 +156,4 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
-
 });
