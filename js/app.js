@@ -68,7 +68,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Event listener para vaciar el carrito con SweetAlert de confirmación
   btnVaciarCarrito.addEventListener("click", function () {
     if (carrito.length === 0) {
       Swal.fire({
@@ -104,7 +103,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Event listener para mostrar el SweetAlert con el total al presionar el botón "Comprar"
   btnComprar.addEventListener("click", function () {
     const totalCarrito = calcularTotalCarrito().toFixed(2);
 
@@ -137,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return pedidos ? JSON.parse(pedidos) : [];
   }
 
-  // Cargar datos desde JSON local
+  
   fetch("productos.json")
     .then((response) => response.json())
     .then((data) => {
@@ -146,7 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     .catch((error) => console.error("Error al cargar los productos:", error));
 
-  // Event listeners para los botones "Agregar al carrito"
+  
   botonesAgregar.forEach((boton) => {
     boton.addEventListener("click", () => {
       const card = boton.closest(".card");
