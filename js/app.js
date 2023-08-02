@@ -15,8 +15,8 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       carrito.push({
         nombre: producto.nombre,
-        precio: producto.precio,
         unidades: unidades,
+        precio: producto.precio,
         subtotal: producto.precio * unidades,
       });
     }
@@ -26,25 +26,13 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function removerDelCarrito(nombreProducto) {
-    carrito = carrito.map((item) => {
-      if (item.nombre === nombreProducto) {
-        if (item.unidades > 1) {
-          item.unidades -= 1;
-          item.subtotal = item.unidades * item.precio;
-        } else {
-          return null;
-        }
-      }
-      return item;
-    }).filter(Boolean);
-
+    carrito = carrito.filter((item) => item.nombre !== nombreProducto);
     guardarPedidoEnLocalStorage();
     mostrarCarrito();
   }
 
   function mostrarCarrito() {
     tablaBody.innerHTML = "";
-    let totalCarrito = 0;
 
     carrito.forEach((item) => {
       const fila = document.createElement("tr");
@@ -55,44 +43,89 @@ document.addEventListener("DOMContentLoaded", function () {
         <td><button class="btn btn-danger btn-remover" data-producto="${item.nombre}">Remover</button></td>
       `;
       tablaBody.appendChild(fila);
-
-      totalCarrito += item.subtotal;
     });
 
-    btnComprar.textContent = `Comprar - Total: $${totalCarrito.toFixed(2)}`;
-
-    agregarEventListenersBotonesRemover();
     actualizarTotal();
+    agregarEventListenersBotonesRemover();
+  }
+
+  function actualizarTotal() {
+    const totalCarrito = calcularTotalCarrito().toFixed(2);
+    btnComprar.textContent = `Comprar - Total: $${totalCarrito}`;
   }
 
   function calcularTotalCarrito() {
     return carrito.reduce((total, item) => total + item.subtotal, 0);
   }
 
-  botonesAgregar.forEach(function (boton) {
-    boton.addEventListener("click", function () {
-      const card = boton.closest(".card");
-      const nombreProducto = card.querySelector(".card-title").textContent;
-      const producto = productos.find((p) => p.nombre === nombreProducto);
+  function agregarEventListenersBotonesRemover() {
+    const botonesRemover = document.querySelectorAll(".btn-remover");
+    botonesRemover.forEach((boton) => {
+      boton.addEventListener("click", () => {
+        const nombreProducto = boton.getAttribute("data-producto");
+        removerDelCarrito(nombreProducto);
+      });
+    });
+  }
 
-      if (producto) {
-        const unidades = parseInt(card.querySelector(".form-select").value);
-        agregarAlCarrito(producto, unidades);
+  // Event listener para vaciar el carrito con SweetAlert de confirmación
+  btnVaciarCarrito.addEventListener("click", function () {
+    if (carrito.length === 0) {
+      Swal.fire({
+        title: "El carrito está vacío",
+        text: "No hay productos en el carrito para vaciar",
+        icon: "info",
+        confirmButtonText: "Aceptar",
+      });
+      return;
+    }
+
+    Swal.fire({
+      title: "¿Estás seguro de vaciar el carrito?",
+      text: "Esta acción no se puede deshacer",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sí, vaciar carrito",
+      cancelButtonText: "Cancelar",
+      confirmButtonColor: "#d33",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        carrito = [];
+        guardarPedidoEnLocalStorage();
+        mostrarCarrito();
+
+        Swal.fire({
+          title: "Carrito vaciado",
+          text: "El carrito ha sido vaciado correctamente",
+          icon: "success",
+          confirmButtonText: "Aceptar",
+        });
       }
     });
   });
 
-  tablaBody.addEventListener("click", function (event) {
-    if (event.target.classList.contains("btn-remover")) {
-      const nombreProducto = event.target.dataset.producto;
-      removerDelCarrito(nombreProducto);
-    }
-  });
+  // Event listener para mostrar el SweetAlert con el total al presionar el botón "Comprar"
+  btnComprar.addEventListener("click", function () {
+    const totalCarrito = calcularTotalCarrito().toFixed(2);
 
-  btnVaciarCarrito.addEventListener("click", function () {
-    carrito = [];
-    guardarPedidoEnLocalStorage();
-    mostrarCarrito();
+    Swal.fire({
+      title: "¿Estás seguro de realizar la compra?",
+      text: `El total es: $${totalCarrito}`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sí, comprar",
+      cancelButtonText: "Cancelar",
+      confirmButtonColor: "#3085d6",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Gracias por su compra",
+          text: `El total es: $${totalCarrito}`,
+          icon: "success",
+          confirmButtonText: "Aceptar",
+        });
+      }
+    });
   });
 
   function guardarPedidoEnLocalStorage() {
@@ -104,22 +137,27 @@ document.addEventListener("DOMContentLoaded", function () {
     return pedidos ? JSON.parse(pedidos) : [];
   }
 
-  function vaciarLocalStorage() {
-    localStorage.removeItem("pedidos");
-  }
-
   // Cargar datos desde JSON local
-  let productos = [];
   fetch("productos.json")
     .then((response) => response.json())
     .then((data) => {
-      productos = data;
+      productos = data; // Array de objetos con los datos de los productos
       mostrarCarrito();
     })
     .catch((error) => console.error("Error al cargar los productos:", error));
 
-  // Event listener para mostrar el alert con el total al presionar el botón "Comprar"
-  btnComprar.addEventListener("click", function () {
-    alert(`Gracias por su compra, el total es: $${calcularTotalCarrito().toFixed(2)}`);
+  // Event listeners para los botones "Agregar al carrito"
+  botonesAgregar.forEach((boton) => {
+    boton.addEventListener("click", () => {
+      const card = boton.closest(".card");
+      const nombreProducto = card.querySelector(".card-title").textContent;
+      const producto = productos.find((p) => p.nombre === nombreProducto);
+
+      if (producto) {
+        const unidades = parseInt(card.querySelector(".form-select").value);
+        agregarAlCarrito(producto, unidades);
+      }
+    });
   });
+
 });
